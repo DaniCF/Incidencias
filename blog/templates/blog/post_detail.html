@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+	{% if user.is_authenticated %}
+		{% if user.username == 'multidan' %}
+
+			{% if post.published_date %}
+				<div>
+					{{ post.published_date }}
+				</div>
+			{% else %}
+				<p></p>
+				<a href="{% url 'post_publish' pk=post.pk %}">Resolver</a>
+				<p></p>
+				<p></p>
+			{% endif %}
+				<a href="{% url 'post_remove' pk=post.pk %}">Borrar</a>
+		{% endif %}
+
+		<div>
+			
+			<p>{{ post.author }}</p>
+			<p>{{ post.text }}</p>
+
+		</div>
+	{% endif %}
+
+{% endblock %}

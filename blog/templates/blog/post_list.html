@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+	{% if user.is_authenticated %}
+		<h3>Incidencias resueltas</h3>
+
+		{% for post in posts %}
+			{% if user.username == 'multidan' %}
+				<div>
+					<p></p>
+					{{ post.author }} --- Creada: {{ post.created_date|date:'d-m-Y' }} --- Resuelta: {{ post.published_date|date:'d-m-Y' }} --- <a href="{% url 'post_detail' pk=post.pk %}">{{ post.text }}</a>
+					<p></p>
+				</div>
+			{% else %}
+				{% if post.author == user %}
+					<div>
+						<p></p>
+						{{ post.author }} --- Creada: {{ post.created_date|date:'d-m-Y' }} --- Resuelta: {{ post.published_date|date:'d-m-Y' }} --- <a href="{% url 'post_detail' pk=post.pk %}">{{ post.text }}</a>
+						<p></p>
+					</div>
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+
+{% endblock %}

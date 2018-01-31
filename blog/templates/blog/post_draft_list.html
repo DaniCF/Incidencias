@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+	<h2> Incidencias sin resolver </h2>
+	{% for post in posts %}
+		{% if user.username == 'multidan' %}
+			<div>
+				<p>{{ post.author }} --- {{ post.created_date|date:'d-m-Y' }} --- <a href="{% url 'post_detail' pk=post.pk %}">{{ post.text }}</a></p>
+			</div>
+		{% else %}
+			{% if post.author == user %}
+				<div>
+					<p>{{ post.author }} --- {{ post.created_date|date:'d-m-Y' }} --- <a href="{% url 'post_detail' pk=post.pk %}">{{ post.text }}</a></p>
+				</div>
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+{% endblock %}

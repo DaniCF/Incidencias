@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+<html>
+<head>
+	<title>Incidencias</title>
+</head>
+<body>
+
+	<h1><a href="/">Incidencias</a></h1>
+ 
+	{% if user.is_authenticated %}
+		<a href="{% url 'post_new' %}">Añadir</a> -----------
+		<a href="{% url 'post_draft_list' %}">Incidencias sin resolver</a>
+		<p>Hello there, General {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
+	{% else %}
+
+		<a href="{% url 'login' %}">Login</a>
+	{% endif %}
+	
+	<p> </p>
+
+	<div>
+		{% block content %}
+		{% endblock %}
+	</div>
+</body>
+</html>
